@@ -28,8 +28,13 @@ export class CargosService {
     throw new HttpException("O cargo informado ja existe no sistema.", HttpStatus.BAD_REQUEST)
   }
 
-  ListarCargos() {
-    return `This action returns all cargos`;
+  async ListarCargos() {
+    const cargos = await this.prisma.cargos.findMany()
+
+    if(cargos.length === 0) {
+      throw new HttpException("Não existe nenhum cargo cadastrado no sistema.", HttpStatus.NOT_FOUND)
+    }
+    return cargos;
   }
 
   FiltrarCargo(id: number) {
