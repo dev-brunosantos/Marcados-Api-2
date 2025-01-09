@@ -1,1 +1,4 @@
-export class CreateCargoDto {}
+export class CreateCargoDto {
+    cargo: string;
+    registro: Date;
+}
