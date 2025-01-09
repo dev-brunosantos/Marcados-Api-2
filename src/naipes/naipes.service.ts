@@ -4,7 +4,7 @@ import { UpdateNaipeDto } from './dto/update-naipe.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
-export class naipesService {
+export class NaipesService {
 
   constructor(
     private prisma: PrismaService
