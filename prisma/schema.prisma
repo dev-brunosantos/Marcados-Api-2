@@ -9,6 +9,42 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  // provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
+}
+
+model Cargos {
+  id          Int      @id @default(autoincrement())
+  cargo       String @unique
+  registro    DateTime @default(now())
+  atualizacao DateTime @updatedAt()
+
+  usuarios Usuarios[]
+}
+
+model Naipes {
+  id Int @id @default(autoincrement())
+  naipe String @unique
+  registro    DateTime @default(now())
+  atualizacao DateTime @updatedAt()
+
+  usuarios Usuarios[]
+}
+
+model Usuarios {
+  id String @id @default(uuid())
+  nome String
+  sobrenome String?
+  email String @unique
+  senha String
+
+  cargoId Int
+  cargos Cargos @relation(fields: [cargoId], references: [id])
+
+  naidpeId Int
+  naipes Naipes @relation(fields: [naidpeId], references: [id])
+
+  dtCadastro DateTime @default(now())
+  dtAtualizacao DateTime @updatedAt()
 }
