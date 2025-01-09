@@ -9,26 +9,26 @@ export class CargosController {
 
   @Post()
   Criar(@Body() createCargoDto: CreateCargoDto) {
-    return this.cargosService.create(createCargoDto);
+    return this.cargosService.Criar(createCargoDto);
   }
 
   @Get()
   Listar() {
-    return this.cargosService.findAll();
+    return this.cargosService.ListarCargos();
   }
 
   @Get(':id')
   Filtrar(@Param('id') id: string) {
-    return this.cargosService.findOne(+id);
+    return this.cargosService.FiltrarCargo(+id);
   }
 
   @Patch(':id')
   Atualizar(@Param('id') id: string, @Body() updateCargoDto: UpdateCargoDto) {
-    return this.cargosService.update(+id, updateCargoDto);
+    return this.cargosService.AtualizarCargo(+id, updateCargoDto);
   }
 
   @Delete(':id')
   Apagar(@Param('id') id: string) {
-    return this.cargosService.remove(+id);
+    return this.cargosService.ExcluirCargo(+id);
   }
 }
