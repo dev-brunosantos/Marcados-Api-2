@@ -70,7 +70,15 @@ export class CargosService {
     throw new HttpException("O ID informado não esta vinculado a nenhum cargo cadastrado no sistema.", HttpStatus.NOT_FOUND)
   }
 
-  ExcluirCargo(id: number) {
-    return `This action removes a #${id} cargo`;
+  async ExcluirCargo(id: number) {
+    const cargoId = await this.prisma.cargos.findFirst({
+      where: { id }
+    })
+    
+    if(!cargoId) {
+      throw new HttpException("O ID informado não esta vinculado a nenhum cargo cadastrado no sistema.", HttpStatus.NOT_FOUND)
+    }
+
+    return { message: `O cargo ${cargoId.cargo.toUpperCase()} foi excluído com sucesso.`}
   }
 }
