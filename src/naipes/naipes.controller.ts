@@ -4,31 +4,31 @@ import { CreateNaipeDto } from './dto/create-naipe.dto';
 import { UpdateNaipeDto } from './dto/update-naipe.dto';
 
 @Controller('naipes')
-export class NaipesController {
+export class naipesController {
   constructor(private readonly naipesService: NaipesService) {}
 
   @Post()
-  create(@Body() createNaipeDto: CreateNaipeDto) {
-    return this.naipesService.create(createNaipeDto);
+  Criar(@Body() createNaipeDto: CreateNaipeDto) {
+    return this.naipesService.Criar(createNaipeDto);
   }
 
   @Get()
-  findAll() {
-    return this.naipesService.findAll();
+  Listar() {
+    return this.naipesService.ListarNaipes();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.naipesService.findOne(+id);
+  Filtrar(@Param('id') id: string) {
+    return this.naipesService.FiltrarNaipe(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateNaipeDto: UpdateNaipeDto) {
-    return this.naipesService.update(+id, updateNaipeDto);
+  Atualizar(@Param('id') id: string, @Body() updateNaipeDto: UpdateNaipeDto) {
+    return this.naipesService.AtualizarNaipe(+id, updateNaipeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.naipesService.remove(+id);
+  Apagar(@Param('id') id: string) {
+    return this.naipesService.ExcluirNaipe(+id);
   }
 }
