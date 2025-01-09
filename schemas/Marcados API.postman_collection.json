@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "6e080171-9943-4d16-9049-d411107efedb",
+		"name": "Marcados API",
+		"description": "API do APP Marcados  \n  \nEssa API foi criada para facilitar a administração do ministério de louvor da 3ª Igreja Presbiteriana Renovada de Barueri.  \n  \nEssa API tem a responsabilidade de gerenciar os metodos\n\n- Cadastro de menbros do ministério de louvor\n    \n- Cadastro de Cargos\n    \n- Cadastro de Naipes\n    \n- Cadastro de repertório\n    \n- Cadastro de lista de louvores\n    \n- Criação de escalas automáticas\n    \n\n  \nEssas funcionalidades serão usadas a princípio em um APP apenas para dispositívos androids.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25651952"
+	},
+	"item": [
+		{
+			"name": "Cargos",
+			"item": [
+				{
+					"name": "Criar Cargo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cargo\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/cargos/"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Cargos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url_local}}:{{port}}/cargos"
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrar Cargo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url_local}}:{{port}}/cargos/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Cargo",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cargo\": \"Ministro\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/cargos/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Cargo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{url_local}}:{{port}}/cargos/id"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Naipes",
+			"item": [
+				{
+					"name": "Criar Naipe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"naipe\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/naipes/"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Naipes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url_local}}:{{port}}/naipes"
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrar Naipe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url_local}}:{{port}}/naipes/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Naipe",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"naipe\": \"Soprano\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/naipes/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Naipe",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{url_local}}:{{port}}/naipes/id"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_local",
+			"value": "http://localhost",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "3000",
+			"type": "string"
+		}
+	]
+}

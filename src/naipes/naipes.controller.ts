@@ -4,7 +4,7 @@ import { CreateNaipeDto } from './dto/create-naipe.dto';
 import { UpdateNaipeDto } from './dto/update-naipe.dto';
 
 @Controller('naipes')
-export class naipesController {
+export class NaipesController {
   constructor(private readonly naipesService: NaipesService) {}
 
   @Post()
