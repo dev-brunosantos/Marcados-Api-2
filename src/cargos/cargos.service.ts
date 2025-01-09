@@ -49,8 +49,25 @@ export class CargosService {
     return cargoId;
   }
 
-  AtualizarCargo(id: number, updateCargoDto: UpdateCargoDto) {
-    return `This action updates a #${id} cargo`;
+  async AtualizarCargo(id: number, updateCargoDto: UpdateCargoDto) {
+    const cargoAntigo = await this.prisma.cargos.findFirst({
+      where: { id }
+    })
+    
+    if(cargoAntigo) {
+      const cargoAtualizado = await this.prisma.cargos.update({
+        where: { id },
+        data: updateCargoDto
+      })
+
+      return {
+        status: "O cargo foi atualizado com sucesso.", 
+        dadosAntigos: cargoAntigo,
+        dadosAtualizados: cargoAtualizado
+      }
+    }
+    
+    throw new HttpException("O ID informado não esta vinculado a nenhum cargo cadastrado no sistema.", HttpStatus.NOT_FOUND)
   }
 
   ExcluirCargo(id: number) {
