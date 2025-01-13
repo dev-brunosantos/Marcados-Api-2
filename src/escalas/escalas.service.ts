@@ -1,10 +1,8 @@
-import { UsuariosService } from './../usuarios/usuarios.service';
 import { Injectable } from '@nestjs/common';
 import { CreateEscalaDto } from './dto/create-escala.dto';
 import { UpdateEscalaDto } from './dto/update-escala.dto';
 import { PrismaService } from './../prisma/prisma.service';
 import { EscolheNaipe } from 'src/functions/escolheCargoNaipe';
-import { CreateUsuarioDto } from 'src/usuarios/dto/create-usuario.dto';
 
 @Injectable()
 export class EscalasService {
@@ -43,49 +41,51 @@ export class EscalasService {
         nome: true,
         sobrenome: true,
         // cargo: { select: { cargo: true }},
-        naipe: { select: { naipe: true }}
+        // naipe: { select: { naipe: true }}
       }
     })
 
-    return usuarios
-  }
-  async EscalaModelo(modelo) {
-    const naipe = await this.FiltrarUsuarios(modelo)
+    const usuario = Math.floor(Math.random() * usuarios.length)
 
-    const naipeModel = Math.floor(Math.random() * naipe.length)
-
-    return naipe[naipeModel]
+    return usuarios[usuario]
   }
 
-  // async GerarEscala(createEscalaDto: CreateEscalaDto) {
-  //   const contralto = await this.FiltrarUsuarios(createEscalaDto.contralto)
-  //   const tecladistas = await this.FiltrarUsuarios(createEscalaDto.teclado)
+  async EscalaModelo(createEscalaDto: CreateEscalaDto) {
 
-  //   const contraltoUser = Math.floor(Math.random() * contralto.length)
-  //   const teclado1 = Math.floor(Math.random() * tecladistas.length)
-  //   const teclado2 = Math.floor(Math.random() * tecladistas.length)
+    const s1 = await this.FiltrarUsuarios(createEscalaDto.soprano1)
+    const s2 = await this.FiltrarUsuarios(createEscalaDto.soprano2)
+    const c1 = await this.FiltrarUsuarios(createEscalaDto.contralto1)
+    const c2 = await this.FiltrarUsuarios(createEscalaDto.contralto2)
+    const t1 = await this.FiltrarUsuarios(createEscalaDto.tenor1)
+    const t2 = await this.FiltrarUsuarios(createEscalaDto.tenor2)
+    const tecla1 = await this.FiltrarUsuarios(createEscalaDto.teclado1)
+    const tecla2 = await this.FiltrarUsuarios(createEscalaDto.teclado2)
+    const v = await this.FiltrarUsuarios(createEscalaDto.violao)
+    const g = await this.FiltrarUsuarios(createEscalaDto.guitarra)
+    const bx = await this.FiltrarUsuarios(createEscalaDto.baixo)
+    const bt = await this.FiltrarUsuarios(createEscalaDto.bateria)
 
-  //   const soprano = this.EscalaModelo(createEscalaDto.bateria)
-  //   const guitarra = this.EscalaModelo(createEscalaDto.guitarra)
-
-  //   return {
-  //     contraltos: contralto[contraltoUser],
-  //     tecladistas: [tecladistas[teclado1], tecladistas[teclado2]],
-  //   }
-
-  // }
-
-  async GerarEscala(createEscalaDto: CreateEscalaDto) {
-    const sing = await this.EscalaModelo(createEscalaDto.contralto)
-    const sing2 = await this.EscalaModelo(createEscalaDto.contralto)
-    const music = await this.EscalaModelo(createEscalaDto.teclado)
-    const music2 = await this.EscalaModelo(createEscalaDto.bateria)
-
-    return {
-      sing: [sing, sing2],
-      music, 
-      music2
+    const dados = {
+      s1, s2, c1, c2, t1, t2, 
+      tecla1, tecla2, v, g, bx, bt
     }
 
+    return dados
+  }
+
+  async GerarEscala(createEscalaDto: CreateEscalaDto) {
+
+    const escalas = await this.EscalaModelo(createEscalaDto)
+
+    return {
+      sopranos: [escalas.s1, escalas.s2],
+      contraltos: [escalas.c1, escalas.c2],
+      tenores: [escalas.t1, escalas.t2],
+      tecladistas: [escalas.tecla1, escalas.tecla2],
+      violonista: escalas.v,
+      guitarra: escalas.g,
+      baixista: escalas.bx,
+      baterista: escalas.bt
+    }
   }
 }
