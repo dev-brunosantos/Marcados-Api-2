@@ -11,9 +11,38 @@ export class EscalasService {
     private prisma: PrismaService
   ) { }
 
-  create(createEscalaDto: CreateEscalaDto) {
-    return 'This action adds a new escala';
+  async create(createEscalaDto: CreateEscalaDto) {
+    const data = new Date().toISOString();
+    const escala = await this.GerarEscala(createEscalaDto);
+
+    const teste = {
+      sopranos: [
+        escala.sopranos?.[0]?.nome || escala.sopranos?.[0]?.sobrenome ? `${escala.sopranos[0].nome} ${escala.sopranos[0].sobrenome}` : 'Indefinido',
+        escala.sopranos?.[1]?.nome || escala.sopranos?.[1]?.sobrenome ? `${escala.sopranos[1].nome} ${escala.sopranos[1].sobrenome}` : 'Indefinido'
+      ],
+      contraltos: [
+        escala.contraltos?.[0]?.nome || escala.contraltos?.[0]?.sobrenome ? `${escala.contraltos[0].nome} ${escala.contraltos[0].sobrenome}` : 'Indefinido',
+        escala.contraltos?.[1]?.nome || escala.contraltos?.[1]?.sobrenome ? `${escala.contraltos[1].nome} ${escala.contraltos[1].sobrenome}` : 'Indefinido'
+      ],
+      tenores: [
+        escala.tenores?.[0]?.nome || escala.tenores?.[0]?.sobrenome ? `${escala.tenores[0].nome} ${escala.tenores[0].sobrenome}` : 'Indefinido',
+        escala.tenores?.[1]?.nome || escala.tenores?.[1]?.sobrenome ? `${escala.tenores[1].nome} ${escala.tenores[1].sobrenome}` : 'Indefinido'
+      ],
+      tecladistas: [
+        escala.tecladistas?.[0]?.nome || escala.tecladistas?.[0]?.sobrenome ? `${escala.tecladistas[0].nome} ${escala.tecladistas[0].sobrenome}` : 'Indefinido',
+        escala.tecladistas?.[1]?.nome || escala.tecladistas?.[1]?.sobrenome ? `${escala.tecladistas[1].nome} ${escala.tecladistas[1].sobrenome}` : 'Indefinido'
+      ],
+      violao: escala.violonista?.nome || escala.violonista?.sobrenome ? `${escala.violonista.nome} ${escala.violonista.sobrenome}` : 'Indefinido',
+      guitarra: escala.guitarra?.nome || escala.guitarra?.sobrenome ? `${escala.guitarra.nome} ${escala.guitarra.sobrenome}` : 'Indefinido',
+      baixo: escala.baixista?.nome || escala.baixista?.sobrenome ? `${escala.baixista.nome} ${escala.baixista.sobrenome}` : 'Indefinido',
+      bateria: escala.baterista?.nome || escala.baterista?.sobrenome ? `${escala.baterista.nome} ${escala.baterista.sobrenome}` : 'Indefinido',
+      culto: data,
+      dtAtualizacao: data,
+    };
+
+    return teste;
   }
+
 
   findAll() {
     return `This action returns all escalas`;
@@ -66,13 +95,14 @@ export class EscalasService {
     const bt = await this.FiltrarUsuarios(createEscalaDto.bateria)
 
     const dados = {
-      s1, s2, c1, c2, t1, t2, 
+      s1, s2, c1, c2, t1, t2,
       tecla1, tecla2, v, g, bx, bt
     }
 
     return dados
   }
 
+  // async GerarEscala(createEscalaDto: CreateEscalaDto) {
   async GerarEscala(createEscalaDto: CreateEscalaDto) {
 
     const escalas = await this.EscalaModelo(createEscalaDto)

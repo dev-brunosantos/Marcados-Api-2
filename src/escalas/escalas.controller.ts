@@ -10,6 +10,7 @@ export class EscalasController {
   @Post()
   create(@Body() createEscalaDto: CreateEscalaDto) {
     return this.escalasService.create(createEscalaDto);
+    // return this.escalasService.create();
   }
 
   @Get()
