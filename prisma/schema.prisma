@@ -40,10 +40,10 @@ model Usuarios {
   senha String
 
   cargoId Int
-  cargos Cargos @relation(fields: [cargoId], references: [id])
+  cargo Cargos @relation(fields: [cargoId], references: [id])
 
-  naidpeId Int
-  naipes Naipes @relation(fields: [naidpeId], references: [id])
+  naipeId Int
+  naipe Naipes @relation(fields: [naipeId], references: [id])
 
   dtCadastro DateTime @default(now())
   dtAtualizacao DateTime @updatedAt()
