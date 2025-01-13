@@ -17,23 +17,23 @@ export class UsuariosController {
     return this.usuariosService.BuscarUsuários();
   }
 
-  @Get('/naipe')
+  @Post('/naipe')
   UsuariosNaipe(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuariosService.FiltrarUsuariosNaipe(createUsuarioDto)
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usuariosService.findOne(+id);
+    return this.usuariosService.FiltrarUsuarioID(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usuariosService.update(+id, updateUsuarioDto);
+    return this.usuariosService.Atualizar(id, updateUsuarioDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.usuariosService.remove(+id);
+    return this.usuariosService.Apagar(id);
   }
 }

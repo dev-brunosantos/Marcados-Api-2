@@ -75,15 +75,76 @@ export class UsuariosService {
     return usuarioNaipe
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} usuario`;
+  async FiltrarUsuarioID(id: string) {
+    const idUsuario = await this.prisma.usuarios.findFirst({ where: { id } })
+
+    if (!idUsuario) {
+      throw new HttpException("Não existe nenhum usuário vinculado ao ID informado.", HttpStatus.NOT_FOUND)
+    }
+
+    return idUsuario
   }
 
-  update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-    return `This action updates a #${id} usuario`;
+  async Atualizar(id: string, updateUsuarioDto: UpdateUsuarioDto) {
+    const usuarioId = await this.prisma.usuarios.findFirst({ 
+      where: { id },
+      select: {
+        id: true,
+        nome: true,
+        sobrenome: true,
+        email: true,
+        cargo: {select: { cargo: true }},
+        naipe: { select: { naipe: true } },
+        dtCadastro: true,
+        dtAtualizacao: true
+      },
+    })
+
+    if (usuarioId) {
+
+      var cargo = EscolheCargo(updateUsuarioDto.cargo)
+      var naipe = EscolheNaipe(updateUsuarioDto.naipe)
+
+      const usuarioAtualizado = await this.prisma.usuarios.update({
+        where: { id },
+        select: {
+          id: true,
+          nome: true,
+          sobrenome: true,
+          email: true,
+          cargo: {select: { cargo: true }},
+          naipe: { select: { naipe: true } },
+          dtCadastro: true,
+          dtAtualizacao: true
+        },
+        data: {
+          nome: updateUsuarioDto.nome,
+          sobrenome: updateUsuarioDto.sobrenome,
+          senha: updateUsuarioDto.senha,
+          cargoId: cargo,
+          naipeId: naipe,
+        }
+      })
+
+      return {
+        status: "Os dados foram atualizados com sucesso.",
+        dadosAntigos: usuarioId,
+        dadosAtualizados: usuarioAtualizado
+      }
+    }
+
+    throw new HttpException("Não existe nenhum usuário vinculado ao ID informado.", HttpStatus.NOT_FOUND)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} usuario`;
+  async Apagar(id: string) {
+    const usuarioId = await this.prisma.usuarios.findFirst({ where: { id } })
+
+    if (!usuarioId) {
+      throw new HttpException("Não existe nenhum usuário vinculado ao ID informado.", HttpStatus.NOT_FOUND)
+    }
+
+    const usuario = await this.prisma.usuarios.delete({ where: { id } })
+
+    return { message: `Os dados do usuário ${usuario.nome.toUpperCase()} ${usuario.sobrenome.toUpperCase()} foram apagados com sucesso. ` }
   }
 }
