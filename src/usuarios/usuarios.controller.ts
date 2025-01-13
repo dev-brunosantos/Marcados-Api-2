@@ -13,7 +13,7 @@ export class UsuariosController {
   }
 
   @Get()
-  findAll() {
+  ListarTodos() {
     return this.usuariosService.BuscarUsuários();
   }
 
@@ -23,17 +23,17 @@ export class UsuariosController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  FiltrarUsuario(@Param('id') id: string) {
     return this.usuariosService.FiltrarUsuarioID(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+  Atualizar(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuariosService.Atualizar(id, updateUsuarioDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  Apagar(@Param('id') id: string) {
     return this.usuariosService.Apagar(id);
   }
 }
