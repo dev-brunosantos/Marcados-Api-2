@@ -14,7 +14,12 @@ export class UsuariosController {
 
   @Get()
   findAll() {
-    return this.usuariosService.findAll();
+    return this.usuariosService.BuscarUsuários();
+  }
+
+  @Get('/naipe')
+  UsuariosNaipe(@Body() createUsuarioDto: CreateUsuarioDto) {
+    return this.usuariosService.FiltrarUsuariosNaipe(createUsuarioDto)
   }
 
   @Get(':id')

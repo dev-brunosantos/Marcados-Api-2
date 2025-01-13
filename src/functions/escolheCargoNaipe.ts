@@ -17,7 +17,7 @@ export function EscolheCargo(cargo):number {
             break;
 
         default:
-            break;
+            return;
             // return { erro: "O cargo informado não esta cadastrado no sistema." }
     }
 
@@ -67,7 +67,7 @@ export function EscolheNaipe(naipe):number {
             break;
 
         default:
-            break;
+            return;
             // return { erro: "O naipe informado não esta cadastrado no sistema." }
     }
 
