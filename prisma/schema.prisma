@@ -48,3 +48,17 @@ model Usuarios {
   dtCadastro DateTime @default(now())
   dtAtualizacao DateTime @updatedAt()
 }
+
+model Escalas {
+  id Int @id @default(autoincrement())
+  sopranos String
+  contraltos String
+  tenores String
+  tecladistas String
+  violao String
+  guitarra String
+  baixo String
+  bateria String
+  culto DateTime
+  dtAtualizacao DateTime @updatedAt()
+}
