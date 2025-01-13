@@ -79,6 +79,8 @@ export class CargosService {
       throw new HttpException("O ID informado não esta vinculado a nenhum cargo cadastrado no sistema.", HttpStatus.NOT_FOUND)
     }
 
+    await this.prisma.cargos.delete({ where: { id }})
+
     return { message: `O cargo ${cargoId.cargo.toUpperCase()} foi excluído com sucesso.`}
   }
 }

@@ -40,11 +40,25 @@ model Usuarios {
   senha String
 
   cargoId Int
-  cargos Cargos @relation(fields: [cargoId], references: [id])
+  cargo Cargos @relation(fields: [cargoId], references: [id])
 
-  naidpeId Int
-  naipes Naipes @relation(fields: [naidpeId], references: [id])
+  naipeId Int
+  naipe Naipes @relation(fields: [naipeId], references: [id])
 
   dtCadastro DateTime @default(now())
+  dtAtualizacao DateTime @updatedAt()
+}
+
+model Escalas {
+  id Int @id @default(autoincrement())
+  sopranos String
+  contraltos String
+  tenores String
+  tecladistas String
+  violao String
+  guitarra String
+  baixo String
+  bateria String
+  culto DateTime
   dtAtualizacao DateTime @updatedAt()
 }

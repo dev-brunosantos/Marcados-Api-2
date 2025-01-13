@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cargo\": \"\"\r\n}",
+							"raw": "{\r\n    \"cargo\": \"Musico\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -53,14 +53,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cargo\": \"Ministro\"\r\n}",
+							"raw": "{\r\n    \"cargo\": \"Musico\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{url_local}}:{{port}}/cargos/1"
+						"url": "{{url_local}}:{{port}}/cargos/3"
 					},
 					"response": []
 				},
@@ -69,7 +69,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{url_local}}:{{port}}/cargos/id"
+						"url": "{{url_local}}:{{port}}/cargos/4"
 					},
 					"response": []
 				}
@@ -145,7 +145,122 @@
 		},
 		{
 			"name": "Usuarios",
-			"item": []
+			"item": [
+				{
+					"name": "Cadastrar Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Gabriel\",\r\n    \"sobrenome\": \"\",\r\n    \"email\": \"gg@email.com\",\r\n    \"senha\": \"1234\",\r\n    \"cargo\": \"Musico\",\r\n    \"naipe\": \"violão\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/usuarios"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Usuarios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cargo\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/usuarios/"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Usuarios por Naipe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"naipe\": \"violão\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/usuarios/naipe"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Usuario por ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cargo\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/usuarios/db4fed96-27db-4ff4-aea9-dd9a99ad9dff"
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Dados",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Monica\",\r\n    \"sobrenome\": \"Santos\",\r\n    \"email\": \"monica@email.com\",\r\n    \"senha\": \"Moni2520\",\r\n    \"cargo\": \"Ministro\",\r\n    \"naipe\": \"contralto\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/usuarios/db4fed96-27db-4ff4-aea9-dd9a99ad9dff"
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cargo\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/usuarios/25c88efc-165d-466b-b0b8-49c3f1d168fc"
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
