@@ -8,8 +8,8 @@ export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
   @Post()
-  create(@Body() createUsuarioDto: CreateUsuarioDto) {
-    return this.usuariosService.create(createUsuarioDto);
+  Cadastrar(@Body() createUsuarioDto: CreateUsuarioDto) {
+    return this.usuariosService.CadastrarUsuario(createUsuarioDto);
   }
 
   @Get()
