@@ -9,7 +9,9 @@ export class UsuariosService {
 
   constructor(
     private prisma: PrismaService
-  ) { }
+  ) { 
+    
+  }
 
   async CadastrarUsuario(createUsuarioDto: CreateUsuarioDto) {
     const usuarioExistente = await this.prisma.usuarios.findFirst({
