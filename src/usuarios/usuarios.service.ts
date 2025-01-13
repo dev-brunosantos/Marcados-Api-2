@@ -21,24 +21,6 @@ export class UsuariosService {
       let cargoId = EscolheCargo(createUsuarioDto.cargo) // 0
       let naipeId = EscolheNaipe(createUsuarioDto.naipe) // 0
 
-      // switch (createUsuarioDto.cargo) {
-      //   case "Ministro":
-      //     cargoId = 1;
-      //     break;
-      
-      //   default:
-      //     break;
-      // }
-
-      // switch (createUsuarioDto.naipe) {
-      //   case "Soprano":
-      //     naipeId = 1;
-      //     break;
-      
-      //   default:
-      //     break;
-      // }
-
       const novoUsuario = await this.prisma.usuarios.create({
         data: {
           nome: createUsuarioDto.nome,
