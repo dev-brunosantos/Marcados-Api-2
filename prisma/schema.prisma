@@ -55,10 +55,10 @@ model Escalas {
   contraltos String
   tenores String
   tecladistas String
-  violao String
-  guitarra String
-  baixo String
-  bateria String
+  violonista String
+  guitarrista String
+  baixista String
+  baterista String
   culto DateTime
   dtAtualizacao DateTime @updatedAt()
 }
