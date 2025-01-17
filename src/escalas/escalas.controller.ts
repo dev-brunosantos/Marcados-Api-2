@@ -8,17 +8,17 @@ export class EscalasController {
   constructor(private readonly escalasService: EscalasService) {}
 
   @Post()
-  create(@Body() createEscalaDto: CreateEscalaDto) {
+  Criar(@Body() createEscalaDto: CreateEscalaDto) {
     return this.escalasService.create(createEscalaDto);
   }
 
   @Get()
-  findAll() {
+  ListarEscalas() {
     return this.escalasService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  FiltrarEscalaID(@Param('id') id: string) {
     return this.escalasService.findOne(+id);
   }
 
