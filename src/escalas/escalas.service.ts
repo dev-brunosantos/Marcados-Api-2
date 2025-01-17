@@ -1,5 +1,5 @@
 import { PrismaService } from './../prisma/prisma.service';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateEscalaDto } from './dto/create-escala.dto';
 import { UpdateEscalaDto } from './dto/update-escala.dto';
 import { EscalasFunctionService } from 'src/functions/escalas-function.service';
@@ -46,11 +46,25 @@ export class EscalasService {
   
 
   findAll() {
-    return `This action returns all escalas`;
+    const escalas = this.prisma.escalas.findMany()
+
+    if(!escalas) {
+      throw new HttpException("Não existe nenhuma escala cadastrada no sistema.", HttpStatus.NOT_FOUND)
+    }
+
+    return escalas
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} escala`;
+  async findOne(id: number) {
+    const escalaId = await this.prisma.escalas.findFirst({
+      where: { id }
+    })
+
+    if(!escalaId) {
+      throw new HttpException("Não existe nenhuma escala vinculada ao ID informado.", HttpStatus.NOT_FOUND)
+    }
+
+    return escalaId
   }
 
   update(id: number, updateEscalaDto: UpdateEscalaDto) {
