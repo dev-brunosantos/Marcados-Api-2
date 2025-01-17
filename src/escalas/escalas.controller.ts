@@ -9,17 +9,17 @@ export class EscalasController {
 
   @Post()
   Criar(@Body() createEscalaDto: CreateEscalaDto) {
-    return this.escalasService.create(createEscalaDto);
+    return this.escalasService.NovaEscala(createEscalaDto);
   }
 
   @Get()
   ListarEscalas() {
-    return this.escalasService.findAll();
+    return this.escalasService.ListarTodos();
   }
 
   @Get(':id')
   FiltrarEscalaID(@Param('id') id: string) {
-    return this.escalasService.findOne(+id);
+    return this.escalasService.ListarTarefa(+id);
   }
 
   @Patch(':id')
