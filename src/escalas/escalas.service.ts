@@ -10,23 +10,20 @@ export class EscalasService {
   constructor(private prisma: PrismaService) { }
 
   async create(createEscalaDto: CreateEscalaDto) {
-    // Chama a função CriarModelo duas vezes para criar as escalas
     const escala1 = await this.CriarModelo(createEscalaDto);
     const escala2 = await this.CriarModelo(createEscalaDto);
   
-    // Cria o objeto final com as escalas combinadas
     const escala = {
-      sopranos: `${escala1.soprano}, ${escala2.soprano}`,  // Combina os sopranos de ambas as escalas
-      contraltos: `${escala1.contralto}, ${escala2.contralto}`, // Combina os contraltos
-      tenores: `${escala1.tenor}, ${escala2.tenor}`, // Combina os tenores
-      tecladistas: `${escala1.teclado}, ${escala2.teclado}`, // Combina os tecladistas
-      violonista: `${escala1.violao}`, // Apenas um violonista (não há escala2)
-      guitarrista: `${escala1.guitarra}`, // Apenas um guitarrista
-      baixista: `${escala1.baixo}`, // Apenas um baixista
-      baterista: `${escala1.bateria}`, // Apenas um baterista
+      sopranos: `${escala1.soprano}, ${escala2.soprano}`, 
+      contraltos: `${escala1.contralto}, ${escala2.contralto}`, 
+      tenores: `${escala1.tenor}, ${escala2.tenor}`, 
+      tecladistas: `${escala1.teclado}, ${escala2.teclado}`, 
+      violonista: `${escala1.violao}`, 
+      guitarrista: `${escala1.guitarra}`, 
+      baixista: `${escala1.baixo}`,
+      baterista: `${escala1.bateria}`, 
     };
   
-    // Cria a escala no banco de dados
     const novaEscala = await this.prisma.escalas.create({
       data: {
         sopranos: escala.sopranos,
