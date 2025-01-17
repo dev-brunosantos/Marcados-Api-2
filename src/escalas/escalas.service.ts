@@ -2,12 +2,15 @@ import { PrismaService } from './../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateEscalaDto } from './dto/create-escala.dto';
 import { UpdateEscalaDto } from './dto/update-escala.dto';
-import { EscolheNaipe } from 'src/functions/escolheCargoNaipe';
+import { FiltarCargoNaipeService } from 'src/functions/filtar-cargo-naipe.service';
 
 @Injectable()
 export class EscalasService {
 
-  constructor(private prisma: PrismaService) { }
+  constructor(
+    private prisma: PrismaService,
+    private filtros: FiltarCargoNaipeService
+  ) { }
 
   async create(createEscalaDto: CreateEscalaDto) {
     const escala1 = await this.CriarModelo(createEscalaDto);
@@ -61,7 +64,7 @@ export class EscalasService {
   // TESTE DE NOVOS METODOS
 
   async FiltrarUsuarioNaipe(naipe: string) {
-    const naipeId = EscolheNaipe(naipe)
+    const naipeId = this.filtros.EscolheNaipe(naipe)
 
     const usuarios = await this.prisma.usuarios.findMany({
       where: {
