@@ -19,9 +19,6 @@ export class UsuariosService {
     })
 
     if (!usuarioExistente) {
-
-      // let cargoId = EscolheCargo(createUsuarioDto.cargo)
-      // let naipeId = EscolheNaipe(createUsuarioDto.naipe)
       let cargoId = this.filtlros.EscolheCargo(createUsuarioDto.cargo)
       let naipeId = this.filtlros.EscolheNaipe(createUsuarioDto.naipe)
 
@@ -105,9 +102,6 @@ export class UsuariosService {
     })
 
     if (usuarioId) {
-
-      // var cargo = EscolheCargo(updateUsuarioDto.cargo)
-      // var naipe = EscolheNaipe(updateUsuarioDto.naipe)
       var cargo = this.filtlros.EscolheCargo(updateUsuarioDto.cargo)
       var naipe = this.filtlros.EscolheNaipe(updateUsuarioDto.naipe)
 
