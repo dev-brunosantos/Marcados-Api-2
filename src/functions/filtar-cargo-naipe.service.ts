@@ -51,6 +51,8 @@ export class FiltarCargoNaipeService {
                 break;
             case "Violão":
             case "violão":
+            case "Violao":
+            case "violao":
                 id = 5;
                 break;
             case "Guitarra":
