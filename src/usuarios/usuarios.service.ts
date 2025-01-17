@@ -62,6 +62,20 @@ export class UsuariosService {
     return usuarios
   }
 
+  async FiltrarUsuarioNome(nome: string) {
+    const nomeUsuarios = await this.prisma.usuarios.findMany({
+      where: {
+        nome: { equals: nome }
+      }
+    })
+
+    if(nomeUsuarios.length == 0) {
+      throw new HttpException("Não existe nenhum usuário cadastrado com o nome informado.", HttpStatus.NOT_FOUND)
+    }
+
+    return nomeUsuarios
+  }
+
   async FiltrarUsuariosNaipe(createUsuarioDto: CreateUsuarioDto) {
 
     var naipe = this.filtlros.EscolheNaipe(createUsuarioDto.naipe)
