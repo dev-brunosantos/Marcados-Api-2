@@ -34,8 +34,5 @@ export class EscalasController {
 
   // TESTE DE NOVOS METODOS
 
-  @Post('/criar')
-  criar(@Body() createEscalaDto: CreateEscalaDto) {
-    return this.escalasService.CriarModelo(createEscalaDto)
-  }
+ 
 }
