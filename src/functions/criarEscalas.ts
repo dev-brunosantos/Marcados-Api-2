@@ -1,5 +1,6 @@
 import { PrismaService } from "../prisma/prisma.service";
 
+
 class Escalas {
     constructor(private prisma: PrismaService){}
 
