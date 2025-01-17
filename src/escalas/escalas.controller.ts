@@ -31,8 +31,4 @@ export class EscalasController {
   remove(@Param('id') id: string) {
     return this.escalasService.remove(+id);
   }
-
-  // TESTE DE NOVOS METODOS
-
- 
 }
