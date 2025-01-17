@@ -10,7 +10,6 @@ export class EscalasController {
   @Post()
   create(@Body() createEscalaDto: CreateEscalaDto) {
     return this.escalasService.create(createEscalaDto);
-    // return this.escalasService.create();
   }
 
   @Get()
@@ -32,8 +31,11 @@ export class EscalasController {
   remove(@Param('id') id: string) {
     return this.escalasService.remove(+id);
   }
-  @Post('/criar') 
-  GerarEscala(@Body() createEscalaDto: CreateEscalaDto) {
-    return this.escalasService.GerarEscala(createEscalaDto)
+
+  // TESTE DE NOVOS METODOS
+
+  @Post('/criar')
+  criar(@Body() createEscalaDto: CreateEscalaDto) {
+    return this.escalasService.CriarModelo(createEscalaDto)
   }
 }
