@@ -3,15 +3,15 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { PrismaService } from './../prisma/prisma.service';
 import { EscolheCargo, EscolheNaipe } from 'src/functions/escolheCargoNaipe';
+import { FiltarCargoNaipeService } from 'src/functions/filtar-cargo-naipe.service';
 
 @Injectable()
 export class UsuariosService {
 
   constructor(
-    private prisma: PrismaService
-  ) { 
-    
-  }
+    private prisma: PrismaService,
+    private filtlros: FiltarCargoNaipeService
+  ) {}
 
   async CadastrarUsuario(createUsuarioDto: CreateUsuarioDto) {
     const usuarioExistente = await this.prisma.usuarios.findFirst({
@@ -20,8 +20,10 @@ export class UsuariosService {
 
     if (!usuarioExistente) {
 
-      let cargoId = EscolheCargo(createUsuarioDto.cargo)
-      let naipeId = EscolheNaipe(createUsuarioDto.naipe)
+      // let cargoId = EscolheCargo(createUsuarioDto.cargo)
+      // let naipeId = EscolheNaipe(createUsuarioDto.naipe)
+      let cargoId = this.filtlros.EscolheCargo(createUsuarioDto.cargo)
+      let naipeId = this.filtlros.EscolheNaipe(createUsuarioDto.naipe)
 
       const novoUsuario = await this.prisma.usuarios.create({
         data: {
@@ -62,7 +64,7 @@ export class UsuariosService {
 
   async FiltrarUsuariosNaipe(createUsuarioDto: CreateUsuarioDto) {
 
-    var naipe = EscolheNaipe(createUsuarioDto.naipe)
+    var naipe = this.filtlros.EscolheNaipe(createUsuarioDto.naipe)
 
     const usuarioNaipe = await this.prisma.usuarios.findMany({
       where: {
@@ -104,8 +106,10 @@ export class UsuariosService {
 
     if (usuarioId) {
 
-      var cargo = EscolheCargo(updateUsuarioDto.cargo)
-      var naipe = EscolheNaipe(updateUsuarioDto.naipe)
+      // var cargo = EscolheCargo(updateUsuarioDto.cargo)
+      // var naipe = EscolheNaipe(updateUsuarioDto.naipe)
+      var cargo = this.filtlros.EscolheCargo(updateUsuarioDto.cargo)
+      var naipe = this.filtlros.EscolheNaipe(updateUsuarioDto.naipe)
 
       const usuarioAtualizado = await this.prisma.usuarios.update({
         where: { id },
