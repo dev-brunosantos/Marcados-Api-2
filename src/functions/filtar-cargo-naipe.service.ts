@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class FiltarCargoNaipeService {
-    EscolheCargo(cargo):number {
+    EscolheCargo(cargo:string):number {
 
         var id = 0
     
@@ -28,7 +28,7 @@ export class FiltarCargoNaipeService {
         return id
     }
 
-    EscolheNaipe(naipe):number {
+    EscolheNaipe(naipe:string):number {
 
         var id = 0
     
