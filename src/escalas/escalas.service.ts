@@ -12,7 +12,7 @@ export class EscalasService {
     private escalas: EscalasFunctionService
   ) { }
 
-  async create(createEscalaDto: CreateEscalaDto) {
+  async NovaEscala(createEscalaDto: CreateEscalaDto) {
     const escala1 = await this.escalas.CriarModelo(createEscalaDto);
     const escala2 = await this.escalas.CriarModelo(createEscalaDto);
   
@@ -45,8 +45,8 @@ export class EscalasService {
   }
   
 
-  findAll() {
-    const escalas = this.prisma.escalas.findMany()
+  async ListarTodos() {
+    const escalas = await this.prisma.escalas.findMany()
 
     if(!escalas) {
       throw new HttpException("Não existe nenhuma escala cadastrada no sistema.", HttpStatus.NOT_FOUND)
@@ -55,7 +55,7 @@ export class EscalasService {
     return escalas
   }
 
-  async findOne(id: number) {
+  async ListarTarefa(id: number) {
     const escalaId = await this.prisma.escalas.findFirst({
       where: { id }
     })
