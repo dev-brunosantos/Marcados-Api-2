@@ -8,18 +8,18 @@ export class EscalasController {
   constructor(private readonly escalasService: EscalasService) {}
 
   @Post()
-  create(@Body() createEscalaDto: CreateEscalaDto) {
-    return this.escalasService.create(createEscalaDto);
+  Criar(@Body() createEscalaDto: CreateEscalaDto) {
+    return this.escalasService.NovaEscala(createEscalaDto);
   }
 
   @Get()
-  findAll() {
-    return this.escalasService.findAll();
+  ListarEscalas() {
+    return this.escalasService.ListarTodos();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.escalasService.findOne(+id);
+  FiltrarEscalaID(@Param('id') id: string) {
+    return this.escalasService.ListarTarefa(+id);
   }
 
   @Patch(':id')
@@ -30,12 +30,5 @@ export class EscalasController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.escalasService.remove(+id);
-  }
-
-  // TESTE DE NOVOS METODOS
-
-  @Post('/criar')
-  criar(@Body() createEscalaDto: CreateEscalaDto) {
-    return this.escalasService.CriarModelo(createEscalaDto)
   }
 }

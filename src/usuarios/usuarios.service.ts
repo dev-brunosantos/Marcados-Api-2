@@ -2,7 +2,6 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { PrismaService } from './../prisma/prisma.service';
-import { EscolheCargo, EscolheNaipe } from 'src/functions/escolheCargoNaipe';
 import { FiltarCargoNaipeService } from 'src/functions/filtar-cargo-naipe.service';
 
 @Injectable()
@@ -57,6 +56,20 @@ export class UsuariosService {
       }
     })
     return usuarios
+  }
+
+  async FiltrarUsuarioNome(nome: string) {
+    const nomeUsuarios = await this.prisma.usuarios.findMany({
+      where: {
+        nome: { equals: nome }
+      }
+    })
+
+    if(nomeUsuarios.length == 0) {
+      throw new HttpException("Não existe nenhum usuário cadastrado com o nome informado.", HttpStatus.NOT_FOUND)
+    }
+
+    return nomeUsuarios
   }
 
   async FiltrarUsuariosNaipe(createUsuarioDto: CreateUsuarioDto) {

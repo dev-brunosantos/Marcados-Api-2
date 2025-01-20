@@ -22,8 +22,13 @@ export class UsuariosController {
     return this.usuariosService.FiltrarUsuariosNaipe(createUsuarioDto)
   }
 
+  @Get('/nome/:nome')
+  FiltrarUsuarioNome(@Param('nome') nome: string) {
+    return this.usuariosService.FiltrarUsuarioNome(nome);
+  }
+
   @Get(':id')
-  FiltrarUsuario(@Param('id') id: string) {
+  FiltrarUsuarioID(@Param('id') id: string) {
     return this.usuariosService.FiltrarUsuarioID(id);
   }
 

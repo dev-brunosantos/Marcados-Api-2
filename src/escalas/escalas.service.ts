@@ -1,20 +1,20 @@
 import { PrismaService } from './../prisma/prisma.service';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateEscalaDto } from './dto/create-escala.dto';
 import { UpdateEscalaDto } from './dto/update-escala.dto';
-import { FiltarCargoNaipeService } from 'src/functions/filtar-cargo-naipe.service';
+import { EscalasFunctionService } from 'src/functions/escalas-function.service';
 
 @Injectable()
 export class EscalasService {
 
   constructor(
     private prisma: PrismaService,
-    private filtros: FiltarCargoNaipeService
+    private escalas: EscalasFunctionService
   ) { }
 
-  async create(createEscalaDto: CreateEscalaDto) {
-    const escala1 = await this.CriarModelo(createEscalaDto);
-    const escala2 = await this.CriarModelo(createEscalaDto);
+  async NovaEscala(createEscalaDto: CreateEscalaDto) {
+    const escala1 = await this.escalas.CriarModelo(createEscalaDto);
+    const escala2 = await this.escalas.CriarModelo(createEscalaDto);
   
     const escala = {
       sopranos: `${escala1.soprano}, ${escala2.soprano}`, 
@@ -26,7 +26,7 @@ export class EscalasService {
       baixista: `${escala1.baixo}`,
       baterista: `${escala1.bateria}`, 
     };
-  
+
     const novaEscala = await this.prisma.escalas.create({
       data: {
         sopranos: escala.sopranos,
@@ -45,12 +45,26 @@ export class EscalasService {
   }
   
 
-  findAll() {
-    return `This action returns all escalas`;
+  async ListarTodos() {
+    const escalas = await this.prisma.escalas.findMany()
+
+    if(!escalas) {
+      throw new HttpException("Não existe nenhuma escala cadastrada no sistema.", HttpStatus.NOT_FOUND)
+    }
+
+    return escalas
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} escala`;
+  async ListarTarefa(id: number) {
+    const escalaId = await this.prisma.escalas.findFirst({
+      where: { id }
+    })
+
+    if(!escalaId) {
+      throw new HttpException("Não existe nenhuma escala vinculada ao ID informado.", HttpStatus.NOT_FOUND)
+    }
+
+    return escalaId
   }
 
   update(id: number, updateEscalaDto: UpdateEscalaDto) {
@@ -60,54 +74,4 @@ export class EscalasService {
   remove(id: number) {
     return `This action removes a #${id} escala`;
   }
-
-  // TESTE DE NOVOS METODOS
-
-  async FiltrarUsuarioNaipe(naipe: string) {
-    const naipeId = this.filtros.EscolheNaipe(naipe)
-
-    const usuarios = await this.prisma.usuarios.findMany({
-      where: {
-        naipe: { id: naipeId }
-      },
-      select: { nome: true, sobrenome: true }
-    })
-
-    return usuarios
-  }
-
-  async FormataUsuarioString(naipe: string) {
-    const usuarios = await this.FiltrarUsuarioNaipe(naipe)
-
-    if (usuarios.length === 0) {
-      throw new Error('Nenhum usuário encontrado para o naipe.');
-    }
-
-    const index = Math.floor(Math.random() * usuarios.length)
-
-    return `${usuarios[index].nome} ${usuarios[index].sobrenome}`
-  }
-
-  async CriarModelo(createEscalaDto: CreateEscalaDto) {
-    const soprano = await this.FormataUsuarioString(createEscalaDto.sopranos)
-    const contralto = await this.FormataUsuarioString(createEscalaDto.contraltos)
-    const tenor = await this.FormataUsuarioString(createEscalaDto.tenores)
-    const teclado = await this.FormataUsuarioString(createEscalaDto.tecladistas)
-    const violao = await this.FormataUsuarioString(createEscalaDto.violao)
-    const guitarra = await this.FormataUsuarioString(createEscalaDto.guitarra)
-    const baixo = await this.FormataUsuarioString(createEscalaDto.baixo)
-    const bateria = await this.FormataUsuarioString(createEscalaDto.bateria)
-
-    return {
-      soprano,
-      contralto,
-      tenor,
-      teclado,
-      violao,
-      guitarra,
-      baixo,
-      bateria
-    }
-  }
-
 }
