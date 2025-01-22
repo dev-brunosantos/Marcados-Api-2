@@ -11,6 +11,25 @@ export class EscalasFunctionService {
         private filtros: FiltarCargoNaipeService
     ) { }
 
+    async FiltrarUsuarioCargo(cargo: string) {
+        const cargoId = this.filtros.EscolheCargo(cargo)
+
+        const ministros = await this.prisma.usuarios.findMany({
+            where: {
+                cargo: { id: cargoId}
+            },
+            select: { nome: true, sobrenome: true }
+        })
+
+        if (ministros.length === 0) {
+            throw new Error('Nenhum usuário encontrado para o naipe.');
+        }
+
+        const index = Math.floor(Math.random() * ministros.length)
+
+        return `${ministros[index].nome} ${ministros[index].sobrenome}`
+    }
+
     async FiltrarUsuarioNaipe(naipe: string) {
         const naipeId = this.filtros.EscolheNaipe(naipe)
 
@@ -24,8 +43,8 @@ export class EscalasFunctionService {
         return usuarios
     }
 
-    async FormataUsuarioString(naipe: string) {
-        const usuarios = await this.FiltrarUsuarioNaipe(naipe)
+    async FormataUsuarioString(funcao: string) {
+        const usuarios = await this.FiltrarUsuarioNaipe(funcao)
 
         if (usuarios.length === 0) {
             throw new Error('Nenhum usuário encontrado para o naipe.');
@@ -37,6 +56,7 @@ export class EscalasFunctionService {
     }
 
     async CriarModelo(createEscalaDto: CreateEscalaDto) {
+        const ministro = await this.FormataUsuarioString(createEscalaDto.ministro)
         const soprano = await this.FormataUsuarioString(createEscalaDto.sopranos)
         const contralto = await this.FormataUsuarioString(createEscalaDto.contraltos)
         const tenor = await this.FormataUsuarioString(createEscalaDto.tenores)
@@ -47,6 +67,7 @@ export class EscalasFunctionService {
         const bateria = await this.FormataUsuarioString(createEscalaDto.bateria)
 
         return {
+            ministro,
             soprano,
             contralto,
             tenor,
