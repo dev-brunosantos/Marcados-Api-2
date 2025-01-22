@@ -15,8 +15,9 @@ export class EscalasService {
   async NovaEscala(createEscalaDto: CreateEscalaDto) {
     const escala1 = await this.escalas.CriarModelo(createEscalaDto);
     const escala2 = await this.escalas.CriarModelo(createEscalaDto);
-  
+
     const escala = {
+      ministro: `${escala1.ministro}`,
       sopranos: `${escala1.soprano}, ${escala2.soprano}`, 
       contraltos: `${escala1.contralto}, ${escala2.contralto}`, 
       tenores: `${escala1.tenor}, ${escala2.tenor}`, 
