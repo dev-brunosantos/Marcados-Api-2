@@ -30,6 +30,7 @@ export class EscalasService {
 
     const novaEscala = await this.prisma.escalas.create({
       data: {
+        ministro: escala.ministro,
         sopranos: escala.sopranos,
         contraltos: escala.contraltos,
         tenores: escala.tenores,
