@@ -56,7 +56,7 @@ export class EscalasFunctionService {
     }
 
     async CriarModelo(createEscalaDto: CreateEscalaDto) {
-        const ministro = await this.FormataUsuarioString(createEscalaDto.ministro)
+        const ministro = await this.FiltrarUsuarioCargo(createEscalaDto.ministro)
         const soprano = await this.FormataUsuarioString(createEscalaDto.sopranos)
         const contralto = await this.FormataUsuarioString(createEscalaDto.contraltos)
         const tenor = await this.FormataUsuarioString(createEscalaDto.tenores)
