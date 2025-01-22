@@ -51,6 +51,7 @@ model Usuarios {
 
 model Escalas {
   id Int @id @default(autoincrement())
+  ministro String
   sopranos String
   contraltos String
   tenores String
