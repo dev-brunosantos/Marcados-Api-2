@@ -71,11 +71,8 @@ model Louvores {
   dtCadastro DateTime @default(now())
   dtAtualizacao DateTime? @updatedAt()
 
-  idLista String
-  lista Lista[]
 }
 
-model ListaLouvores {
-  id String @id @default(uuid())
-  lista Louvores[]
-}
+// model ListaLouvores {
+//   id String @id @default(uuid())
+// }
