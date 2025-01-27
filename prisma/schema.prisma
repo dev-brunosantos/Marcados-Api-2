@@ -70,4 +70,12 @@ model Louvores {
   link String?
   dtCadastro DateTime @default(now())
   dtAtualizacao DateTime? @updatedAt()
+
+  idLista String
+  lista Lista[]
+}
+
+model ListaLouvores {
+  id String @id @default(uuid())
+  lista Louvores[]
 }
