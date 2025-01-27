@@ -1,4 +1,4 @@
-export class Louvore {
+export class Louvores {
     id: number
     nome: string 
     link?: string
