@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLouvoreDto } from './dto/create-louvore.dto';
 import { UpdateLouvoreDto } from './dto/update-louvore.dto';
+import { PrismaService } from './../prisma/prisma.service';
 
 @Injectable()
 export class LouvoresService {
+
+  constructor(private prisma: PrismaService) {}
+
   create(createLouvoreDto: CreateLouvoreDto) {
     return 'This action adds a new louvore';
   }
