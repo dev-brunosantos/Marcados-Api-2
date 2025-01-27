@@ -1,1 +1,4 @@
-export class CreateLouvoreDto {}
+export class CreateLouvoreDto {
+    nome: string 
+    link?: string
+}
