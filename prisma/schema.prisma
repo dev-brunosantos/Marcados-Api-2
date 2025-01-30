@@ -63,3 +63,16 @@ model Escalas {
   culto DateTime
   dtAtualizacao DateTime @updatedAt()
 }
+
+model Louvores {
+  id Int @id @default(autoincrement())
+  nome String 
+  link String?
+  dtCadastro DateTime @default(now())
+  dtAtualizacao DateTime? @updatedAt()
+
+}
+
+// model ListaLouvores {
+//   id String @id @default(uuid())
+// }
