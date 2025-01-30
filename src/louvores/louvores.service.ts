@@ -38,8 +38,17 @@ export class LouvoresService {
     return louvores
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} louvore`;
+  async BuscarLouvorID(id: number) {
+    const idLouvor = await this.prisma.louvores.findFirst({
+      where: { id }
+    })
+
+    if(!idLouvor) {
+      throw new HttpException("O ID informado não esta vinculado a nenhum louvor cadastrado no sistema", HttpStatus.NOT_FOUND)
+    }
+
+    return idLouvor
+
   }
 
   async Atualizar(id: number, updateLouvoreDto: UpdateLouvoreDto) {
