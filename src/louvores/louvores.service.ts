@@ -42,8 +42,25 @@ export class LouvoresService {
     return `This action returns a #${id} louvore`;
   }
 
-  update(id: number, updateLouvoreDto: UpdateLouvoreDto) {
-    return `This action updates a #${id} louvore`;
+  async update(id: number, updateLouvoreDto: UpdateLouvoreDto) {
+    const idLouvor = await this.prisma.louvores.findFirst({
+      where: { id }
+    })
+
+    if(!idLouvor) {
+      throw new HttpException("O ID informado não esta vinculado a nenhum louvor cadastrado no sistema", HttpStatus.NOT_FOUND)
+    }
+
+    const atualizacao = await this.prisma.louvores.update({
+      where: { id },
+      data: updateLouvoreDto
+    })
+
+    return {
+      message: "As alterações foram finalizadas com sucesso.",
+      dados_antigos: idLouvor,
+      dados_atualizados: atualizacao
+    }
   }
 
   async remove(id: number) {
