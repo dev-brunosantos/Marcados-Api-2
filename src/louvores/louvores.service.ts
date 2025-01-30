@@ -46,7 +46,19 @@ export class LouvoresService {
     return `This action updates a #${id} louvore`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} louvore`;
+  async remove(id: number) {
+    const idLouvor = await this.prisma.louvores.findFirst({
+      where: { id }
+    })
+
+    if(!idLouvor) {
+      throw new HttpException("O ID informado não esta vinculado a nenhum louvor cadastrado no sistema", HttpStatus.NOT_FOUND)
+    }
+
+    await this.prisma.louvores.delete({
+      where: { id }
+    })
+
+    return `O louvor ${idLouvor.nome} foi apagado como solicitado.`
   }
 }
