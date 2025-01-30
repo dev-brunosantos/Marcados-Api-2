@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateLouvoreDto } from './dto/create-louvores.dto';
 import { UpdateLouvoreDto } from './dto/update-louvores.dto';
 import { PrismaService } from './../prisma/prisma.service';
@@ -8,12 +8,34 @@ export class LouvoresService {
 
   constructor(private prisma: PrismaService) {}
 
-  create(createLouvoreDto: CreateLouvoreDto) {
-    return 'This action adds a new louvore';
-  }
+  async create(createLouvoreDto: CreateLouvoreDto) {
+    const ministro = await this.prisma.usuarios.findFirst({
+      where: { nome: createLouvoreDto.ministro }
+    })
 
-  findAll() {
-    return `This action returns all louvores`;
+    if(ministro.cargoId === 1) {
+
+      const novoLouvor = await this.prisma.louvores.create({
+        data: {
+          nome: createLouvoreDto.nome,
+          link: createLouvoreDto.link
+        }
+      })
+
+      return "Novo louvor cadastrado com sucesso."
+    }
+
+    throw new HttpException("O usuário não é ministro e não possui acesso a funcionalidade de cadastro de louvores.", HttpStatus.BAD_REQUEST)
+  }
+  
+  async findAll() {
+    const louvores = await this.prisma.louvores.findMany()
+    
+    if(!louvores) {
+      throw new HttpException("Não existe nenhum louvor cadastrado no sistema", HttpStatus.NOT_FOUND)
+    }
+
+    return louvores
   }
 
   findOne(id: number) {
