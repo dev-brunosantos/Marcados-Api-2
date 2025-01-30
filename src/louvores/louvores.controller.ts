@@ -9,12 +9,12 @@ export class LouvoresController {
 
   @Post()
   create(@Body() createLouvoreDto: CreateLouvoreDto) {
-    return this.louvoresService.create(createLouvoreDto);
+    return this.louvoresService.Criar(createLouvoreDto);
   }
 
   @Get()
   findAll() {
-    return this.louvoresService.findAll();
+    return this.louvoresService.Listar();
   }
 
   @Get(':id')
@@ -24,11 +24,11 @@ export class LouvoresController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLouvoreDto: UpdateLouvoreDto) {
-    return this.louvoresService.update(+id, updateLouvoreDto);
+    return this.louvoresService.Atualizar(+id, updateLouvoreDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.louvoresService.remove(+id);
+    return this.louvoresService.Apagar(+id);
   }
 }
