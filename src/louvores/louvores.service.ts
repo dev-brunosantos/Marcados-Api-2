@@ -8,7 +8,7 @@ export class LouvoresService {
 
   constructor(private prisma: PrismaService) {}
 
-  async create(createLouvoreDto: CreateLouvoreDto) {
+  async Criar(createLouvoreDto: CreateLouvoreDto) {
     const ministro = await this.prisma.usuarios.findFirst({
       where: { nome: createLouvoreDto.ministro }
     })
@@ -28,7 +28,7 @@ export class LouvoresService {
     throw new HttpException("O usuário não é ministro e não possui acesso a funcionalidade de cadastro de louvores.", HttpStatus.BAD_REQUEST)
   }
   
-  async findAll() {
+  async Listar() {
     const louvores = await this.prisma.louvores.findMany()
     
     if(!louvores) {
@@ -42,7 +42,7 @@ export class LouvoresService {
     return `This action returns a #${id} louvore`;
   }
 
-  async update(id: number, updateLouvoreDto: UpdateLouvoreDto) {
+  async Atualizar(id: number, updateLouvoreDto: UpdateLouvoreDto) {
     const idLouvor = await this.prisma.louvores.findFirst({
       where: { id }
     })
@@ -63,7 +63,7 @@ export class LouvoresService {
     }
   }
 
-  async remove(id: number) {
+  async Apagar(id: number) {
     const idLouvor = await this.prisma.louvores.findFirst({
       where: { id }
     })
