@@ -19,7 +19,7 @@ export class LouvoresController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.louvoresService.findOne(+id);
+    return this.louvoresService.BuscarLouvorID(+id);
   }
 
   @Patch(':id')
