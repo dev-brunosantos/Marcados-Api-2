@@ -153,7 +153,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Gabriel\",\r\n    \"sobrenome\": \"\",\r\n    \"email\": \"gg@email.com\",\r\n    \"senha\": \"1234\",\r\n    \"cargo\": \"Musico\",\r\n    \"naipe\": \"violão\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"Paulo\",\r\n    \"sobrenome\": \"Nascimanto\",\r\n    \"email\": \"paulonascimento@email.com\",\r\n    \"senha\": \"1234\",\r\n    \"cargo\": \"musico\",\r\n    \"naipe\": \"violão\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -192,7 +192,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"naipe\": \"violão\"\r\n}",
+							"raw": "{\r\n    \"naipe\": \"baixo\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -225,20 +225,41 @@
 					"response": []
 				},
 				{
-					"name": "Editar Dados",
+					"name": "Buscar Usuarios por nome",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "PATCH",
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Monica\",\r\n    \"sobrenome\": \"Santos\",\r\n    \"email\": \"monica@email.com\",\r\n    \"senha\": \"Moni2520\",\r\n    \"cargo\": \"Ministro\",\r\n    \"naipe\": \"contralto\"\r\n}",
+							"raw": "{\r\n    \"cargo\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{url_local}}:{{port}}/usuarios/db4fed96-27db-4ff4-aea9-dd9a99ad9dff"
+						"url": "{{url_local}}:{{port}}/usuarios/nome/bruno"
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Dados",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Paulo\",\r\n    \"sobrenome\": \"Nascimento\",\r\n    \"email\": \"paulonascimento@email.com\",\r\n    \"senha\": \"1234\",\r\n    \"cargo\": \"musico\",\r\n    \"naipe\": \"baixo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/usuarios/612d1236-e369-44f4-865d-ad9ab53494d4"
 					},
 					"response": []
 				},
@@ -256,7 +277,131 @@
 								}
 							}
 						},
-						"url": "{{url_local}}:{{port}}/usuarios/25c88efc-165d-466b-b0b8-49c3f1d168fc"
+						"url": "{{url_local}}:{{port}}/usuarios/ff016743-06ef-4ae5-a532-202493ebb2f5"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Escalas",
+			"item": [
+				{
+					"name": "Gerar Escalas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sopranos\": \"soprano\",\r\n    \"contraltos\": \"contralto\",\r\n    \"tenores\": \"tenor\",\r\n    \"tecladistas\": \"teclado\",\r\n    \"violao\": \"violão\",\r\n    \"guitarra\": \"guitarra\",\r\n    \"baixo\": \"baixo\",\r\n    \"bateria\": \"bateria\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/escalas/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Louvores",
+			"item": [
+				{
+					"name": "Novo Louvor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ministro\": \"Dynho\",\r\n    \"nome\":\"GRATIDÃO \",\r\n    \"link\": \"https://www.youtube.com/watch?v=3SEz_SemHtk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/louvores"
+					},
+					"response": []
+				},
+				{
+					"name": "Lista de Louvores",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"GRATIDÃO \",\r\n    \"link\": \"https://www.youtube.com/watch?v=3SEz_SemHtk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/louvores"
+					},
+					"response": []
+				},
+				{
+					"name": "Louvor ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"GRATIDÃO \",\r\n    \"link\": \"https://www.youtube.com/watch?v=3SEz_SemHtk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/louvores/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Lista de Louvores Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"GRATIDÃO\",\r\n    \"link\": \"https://www.youtube.com/watch?v=3SEz_SemHtk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/louvores/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Louvor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"GRATIDÃO \",\r\n    \"link\": \"https://www.youtube.com/watch?v=3SEz_SemHtk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_local}}:{{port}}/louvores/4"
 					},
 					"response": []
 				}
